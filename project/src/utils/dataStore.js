@@ -1,5 +1,5 @@
 let tasks = [
-    {
+  {
     id: 1,
     title: "Learn Node.js",
     description: "Complete the 4-week backend course",
@@ -8,7 +8,7 @@ let tasks = [
     createdAt: new Date("2025-01-01T09:00:00").toISOString(),
     updatedAt: new Date("2025-01-01T09:00:00").toISOString(),
   },
-   {
+  {
     id: 2,
     title: "Build a REST API",
     description: "Create a Task Manager API with Express",
@@ -26,38 +26,41 @@ let tasks = [
     createdAt: new Date("2025-01-02T10:00:00").toISOString(),
     updatedAt: new Date("2025-01-02T10:00:00").toISOString(),
   },
-
-]
+];
 
 let nextId = 3;
 
 const getAllTasks = () => {
-    return tasks;
-}
+  return tasks;
+};
 
-console.log(getAllTasks());
+// console.log(getAllTasks());
 
 const getTaskById = (id) => {
-    return tasks.find(task => task.id === id);
-}
+  return tasks.find((task) => task.id === id);
+};
 
-console.log(getTaskById(1));
+// console.log(getTaskById(1));
 
 const createTask = (taskData) => {
-    const newTask = {
-        id: ++nextId,
-        title: taskData.title,
-        description: taskData.description|| "",
-        completed: taskData.completed || false,
-        priority: taskData.priority || "medium",
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-    };
-    tasks.push(newTask);
-    return newTask;
-}
+  const newTask = {
+    id: ++nextId,
+    title: taskData.title,
+    description: taskData.description || "",
+    completed: taskData.completed || false,
+    priority: taskData.priority || "medium",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  tasks.push(newTask);
+  return newTask;
+};
 
-console.log(createTask({ title: "Write Code", description: "Backend with golang" }));
+// console.log(
+//   createTask({ title: "Write Code", description: "Backend with golang" }),
+// );
+
+// Update Task
 
 const updateTask = (id, updates) => {
     const index = tasks.findIndex((task) => task.id === id);
@@ -76,38 +79,29 @@ const updateTask = (id, updates) => {
     return updatedTask;
 };
 
-console.log(updateTask(1, { title: "Making Pizza for camping", description: "We will be hungry after the walk"}));
-
 
 const markAsCompleted = (id) => {
-    const task = tasks.find((task) => task.id === id);
-    if (!task) return null;
+  const task = tasks.find((task) => task.id === id);
+  if (!task) return null;
 
-    task.completed = true;
-    task.updatedAt = new Date().toISOString();
-    return task;
+  task.completed = true;
+  task.updatedAt = new Date().toISOString();
+  return task;
 };
 
-console.log(markAsCompleted(1))
-
+// console.log(markAsCompleted(1));
 
 const get1task = (id) => {
   return tasks.find((task) => task.id === id) || null;
 };
 
-console.log(get1task(2))
+// console.log(get1task(2));
 
-
-const deleteTask = (id) => {
-  const index = tasks.findIndex((task) => task.id === id);
-  if (index === -1) return null;
-
-  const [deletedTask] = tasks.splice(index, 1);
-  return deletedTask;
+module.exports = {
+  getAllTasks,
+  getTaskById,
+  get1task,
+  createTask,
+  markAsCompleted, 
+  updateTask,
 };
-
-// console.log(deleteTask(1))
-
-
-
-module.exports = {getAllTasks, getTaskById, get1task, createTask, updateTask, markAsCompleted, deleteTask}
